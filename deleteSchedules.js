@@ -121,6 +121,8 @@ async function main() {
 
     if (dryRun) {
       console.log(`\n[DRY RUN] Would have deleted ${completedSchedules.length} schedules`);
+      console.log('\nTo perform the actual deletion, run:');
+      console.log('node deleteSchedules.js --dry-run=false');
     } else {
       console.log(`\nDeletion complete. Successfully deleted: ${successCount}, Failed: ${failureCount}`);
     }

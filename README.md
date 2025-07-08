@@ -1,109 +1,76 @@
-# Delete Sanity.io Schedules
+# Delete Sanity Schedules
 
-A Node.js utility script to clean up completed schedules in your Sanity.io project. This tool helps manage and remove succeeded schedule entries, keeping your Sanity.io project tidy.
-
-## Features
-
-- Lists all completed (succeeded) schedules in your Sanity.io project
-- Supports dry-run mode to preview deletions without making changes
-- Detailed logging of operations
-- Batch deletion with error handling
-- Environment variable configuration for secure credential management
+A Node.js utility to delete schedules from your Sanity.io project.
 
 ## Prerequisites
 
-- Node.js (v14 or higher recommended)
-- pnpm package manager
-- Sanity.io project with API access
+- Node.js (LTS version recommended)
+- PNPM (v10.11.0 or later)
+- Sanity project credentials
 
 ## Installation
 
 1. Clone the repository:
-   ```bash
-   git clone [your-repo-url]
-   cd deleteschedules
-   ```
+```bash
+git clone [your-repo-url]
+cd deleteSanitySchedules
+```
 
 2. Install dependencies:
-   ```bash
-   pnpm install
-   ```
+```bash
+pnpm install
+```
 
-3. Create a `.env` file in the project root with your Sanity.io credentials:
-   ```env
-   SANITY_API_TOKEN=your_token_here
-   SANITY_STUDIO_PROJECT_ID=your_project_id
-   SANITY_STUDIO_DATASET=your_dataset
-   ```
+3. Create a `.env` file in the root directory with your Sanity credentials:
+```env
+SANITY_PROJECT_ID=your_project_id
+SANITY_DATASET=your_dataset
+SANITY_TOKEN=your_token
+```
 
 ## Usage
 
-### Dry Run (Safe Mode)
+### Dry Run Mode (Safe Mode)
 To preview which schedules would be deleted without actually deleting them:
 
 ```bash
-pnpm start
-# or
 pnpm start --dry-run=true
 ```
 
 ### Actual Deletion
-To perform the actual deletion of completed schedules:
+To perform the actual deletion of schedules:
 
 ```bash
+pnpm start
+# or explicitly set dry-run to false
 pnpm start --dry-run=false
 ```
 
+The script will provide detailed output including:
+- Number of schedules found
+- Schedule IDs and details
+- Deletion status for each schedule
+- Summary of operations
+
 ## Environment Variables
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `SANITY_API_TOKEN` | Your Sanity.io API token with write access | Yes |
-| `SANITY_STUDIO_PROJECT_ID` | Your Sanity.io project ID | Yes |
-| `SANITY_STUDIO_DATASET` | The dataset name (e.g., 'production') | Yes |
+- `SANITY_PROJECT_ID`: Your Sanity project ID
+- `SANITY_DATASET`: The dataset name (usually "production")
+- `SANITY_TOKEN`: Your Sanity API token with write permissions
 
-## Output
+## Dependencies
 
-The script provides detailed output including:
-- Number of completed schedules found
-- Schedule IDs and creation dates
-- Deletion status for each schedule
-- Summary of successful and failed operations
-
-Example output:
-```
-Environment variables loaded:
-- Token is present (first 4 characters): xxxx
-- Project ID: your_project_id
-- Dataset: production
-- Dry run mode: enabled (will not delete)
-
-Fetching completed schedules...
-Found 5 completed schedules
-Schedule ID: abc123, Created at: 2024-01-01, State: succeeded
-...
-
-[DRY RUN] Would have deleted 5 schedules
-```
-
-## Error Handling
-
-The script includes comprehensive error handling:
-- Validates all required environment variables
-- Handles API request failures gracefully
-- Continues processing remaining schedules if one fails
-- Provides detailed error messages for troubleshooting
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+- `dotenv`: For loading environment variables
+- `node-fetch`: For making HTTP requests to Sanity API
 
 ## License
 
 ISC
 
-## Security
+## Contributing
 
-- Never commit your `.env` file
-- Use environment variables for all sensitive information
-- Review the dry-run output before performing actual deletions 
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request 
