@@ -12,7 +12,7 @@ A Node.js utility to delete schedules from your Sanity.io project.
 
 1. Clone the repository:
 ```bash
-git clone [your-repo-url]
+git clone https://github.com/jasonb194/deleteSanitySchedules.git
 cd deleteSanitySchedules
 ```
 
@@ -85,11 +85,3 @@ The script will provide detailed output including:
 ## License
 
 MIT
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request 
