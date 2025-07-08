@@ -1,53 +1,46 @@
 # Delete Sanity Schedules
 
-A Node.js utility to delete completed schedules from your Sanity.io project. This tool will only remove schedules that have already been completed, leaving active and pending schedules untouched.
+A TypeScript utility to delete schedules from your Sanity.io project. By default, this tool removes schedules in the 'succeeded' state, but can be configured to delete schedules in other states (scheduled, cancelled).
 
 ## Prerequisites
 
-- Node.js (LTS version recommended)
-- Package manager: either pnpm (v10.11.0 or later) or npm
-- Sanity project credentials
+- A Sanity project
+- Sanity CLI installed (`npm install -g @sanity/cli`)
+- Being logged in to Sanity CLI (`sanity login`)
 
 ## Installation
 
-1. Clone the repository:
-```bash
-git clone https://github.com/jasonb194/deleteSanitySchedules.git
-cd deleteSanitySchedules
-```
-
+1. Clone this repository
 2. Install dependencies:
-
-Using pnpm (recommended):
-```bash
-pnpm install
-```
-
-Using npm:
-```bash
-npm install
-```
-
-3. Create a `.env` file in the root directory with your Sanity credentials:
-```env
-SANITY_PROJECT_ID=your_project_id
-SANITY_DATASET=your_dataset
-SANITY_TOKEN=your_token
-```
+   ```bash
+   pnpm install
+   ```
 
 ## Usage
+
+This script uses `sanity exec` to run in the context of your Sanity project, which automatically handles authentication and project configuration. The TypeScript code is automatically compiled before execution.
+
+### Command Line Arguments
+
+- `--days=<number>`: Specify how many days old a schedule must be to be considered for deletion. Defaults to 90 days if not specified.
+- `--dry-run=<boolean>`: Whether to run in dry-run mode (default: true).
+- `--state=<string>`: Filter schedules by state ('succeeded', 'scheduled', or 'cancelled'). Defaults to 'succeeded' if not specified.
 
 ### Dry Run Mode (Safe Mode) - Default
 To preview which completed schedules would be deleted without actually deleting them:
 
 Using pnpm:
 ```bash
-pnpm start --dry-run=true
+pnpm start
+# Or specify a custom number of days:
+pnpm start -- --days=30
 ```
 
 Using npm:
 ```bash
-npm start -- --dry-run=true
+npm run start
+# Or specify a custom number of days:
+npm run start -- --days=30
 ```
 
 ### Actual Deletion
@@ -55,33 +48,29 @@ To perform the actual deletion of completed schedules:
 
 Using pnpm:
 ```bash
-pnpm start --dry-run=false
+pnpm delete
+# Or specify a custom number of days:
+pnpm delete -- --days=30
 ```
 
 Using npm:
 ```bash
-npm start -- --dry-run=false
+npm run delete
+# Or specify a custom number of days:
+npm run delete -- --days=30
 ```
-
-Note: When using npm, you need to add an extra `--` before the arguments.
 
 The script will provide detailed output including:
 - Number of completed schedules found
-- Schedule IDs and details
+- Schedule IDs and details (sorted by creation date, oldest first)
 - Deletion status for each schedule
 - Summary of operations
 
-## Environment Variables
+## Features
 
-- `SANITY_PROJECT_ID`: Your Sanity project ID
-- `SANITY_DATASET`: The dataset name (usually "production")
-- `SANITY_TOKEN`: Your Sanity API token with write permissions
-
-## Dependencies
-
-- `dotenv`: For loading environment variables
-- `node-fetch`: For making HTTP requests to Sanity API
-
-## License
-
-MIT
+- Written in TypeScript for better type safety and developer experience
+- Dry run mode to safely preview changes
+- State filtering (succeeded, scheduled, cancelled)
+- Uses Sanity CLI for authentication
+- Detailed logging of operations
+- Continues processing if individual deletions fail

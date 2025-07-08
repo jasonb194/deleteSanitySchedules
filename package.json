@@ -1,18 +1,24 @@
 {
   "name": "delete-sanity-schedules",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A utility to delete completed schedules from your Sanity.io project",
+  "main": "dist/deleteSchedules.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node deleteSchedules.js"
+    "build": "tsc",
+    "start": "pnpm build && sanity exec dist/deleteSchedules.js --with-user-token",
+    "delete": "pnpm build && sanity exec dist/deleteSchedules.js --with-user-token -- --dry-run=false",
+    "example": "pnpm build && sanity exec dist/exampleScript.js --with-user-token"
   },
-  "keywords": [],
+  "keywords": ["sanity", "schedules", "cleanup"],
   "author": "",
   "license": "MIT",
   "packageManager": "pnpm@10.11.0",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
   "dependencies": {
-    "dotenv": "^16.4.5",
-    "node-fetch": "^2.7.0"
+    "@sanity/cli": "^3.0.0",
+    "@sanity/client": "^6.0.0"
   }
 }
