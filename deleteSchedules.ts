@@ -1,10 +1,17 @@
 import {getCliClient} from '@sanity/cli'
 
+interface SanityDocument {
+  documentId: string;
+  documentType: string;
+}
+
 interface SanitySchedule {
   id: string;
   createdAt: string;
+  executeAt: string;
   executedAt: string;
   state: string;
+  documents: SanityDocument[];
 }
 
 interface SchedulesResponse {
@@ -85,7 +92,18 @@ async function main(): Promise<void> {
     
     // Log the schedules for inspection
     completedSchedules.forEach((schedule) => {
-      console.log(`Schedule ID: ${schedule.id}, Created at: ${schedule.createdAt}, State: ${schedule.state}`);
+      const documents = schedule.documents.map(doc => 
+        `${doc.documentType} (${doc.documentId})`
+      ).join(', ');
+      
+      console.log(
+        `Schedule ID: ${schedule.id}\n` +
+        `  Documents: ${documents}\n` +
+        `  Created: ${schedule.createdAt}\n` +
+        `  Execute At: ${schedule.executeAt}\n` +
+        `  Executed At: ${schedule.executedAt}\n` +
+        `  State: ${schedule.state}\n`
+      );
     });
 
     if (completedSchedules.length === 0) {

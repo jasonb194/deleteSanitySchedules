@@ -61,8 +61,13 @@ npm run delete -- --days=30
 ```
 
 The script will provide detailed output including:
-- Number of completed schedules found
-- Schedule IDs and details (sorted by creation date, oldest first)
+- Number of schedules found
+- Schedule details including:
+  - Schedule ID
+  - Document type and ID
+  - Creation timestamp
+  - Planned and actual execution times
+  - Schedule state
 - Deletion status for each schedule
 - Summary of operations
 
