@@ -65,7 +65,7 @@ The script will provide detailed output including:
 
 ## License
 
-ISC
+MIT
 
 ## Contributing
 
