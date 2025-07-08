@@ -29,35 +29,19 @@ This script uses `sanity exec` to run in the context of your Sanity project, whi
 ### Dry Run Mode (Safe Mode) - Default
 To preview which completed schedules would be deleted without actually deleting them:
 
-Using pnpm:
 ```bash
-pnpm start
+sanity exec ./deleteSchedules.ts --with-user-token
 # Or specify a custom number of days:
-pnpm start -- --days=30
-```
-
-Using npm:
-```bash
-npm run start
-# Or specify a custom number of days:
-npm run start -- --days=30
+sanity exec ./deleteSchedules.ts --with-user-token -- --days=30
 ```
 
 ### Actual Deletion
 To perform the actual deletion of completed schedules:
 
-Using pnpm:
 ```bash
-pnpm delete
+sanity exec ./deleteSchedules.ts --with-user-token -- --dry-run=false
 # Or specify a custom number of days:
-pnpm delete -- --days=30
-```
-
-Using npm:
-```bash
-npm run delete
-# Or specify a custom number of days:
-npm run delete -- --days=30
+sanity exec ./deleteSchedules.ts --with-user-token -- --dry-run=false --days=30
 ```
 
 The script will provide detailed output including:
