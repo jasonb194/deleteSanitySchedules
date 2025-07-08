@@ -45,12 +45,12 @@ async function fetchCompletedSchedules(): Promise<SanitySchedule[]> {
     });
     
     // Filter schedules older than 90 days based on executedAt
-    const ninetyDaysAgo = new Date();
-    ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - days);
+    const checkDate = new Date();
+    checkDate.setDate(checkDate.getDate() - days);
     console.log('Fetched Schedules', data.schedules.length);
     return data.schedules.filter(schedule => {
       const executionDate = new Date(schedule.executedAt);
-      return executionDate < ninetyDaysAgo;
+      return executionDate < checkDate;
     });
   } catch (error) {
     console.error('Error fetching completed schedules:', error);
