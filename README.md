@@ -1,6 +1,6 @@
 # Delete Sanity Schedules
 
-A Node.js utility to delete schedules from your Sanity.io project.
+A Node.js utility to delete completed schedules from your Sanity.io project. This tool will only remove schedules that have already been completed, leaving active and pending schedules untouched.
 
 ## Prerequisites
 
@@ -38,7 +38,7 @@ SANITY_TOKEN=your_token
 ## Usage
 
 ### Dry Run Mode (Safe Mode) - Default
-To preview which schedules would be deleted without actually deleting them:
+To preview which completed schedules would be deleted without actually deleting them:
 
 Using pnpm:
 ```bash
@@ -51,7 +51,7 @@ npm start -- --dry-run=true
 ```
 
 ### Actual Deletion
-To perform the actual deletion of schedules:
+To perform the actual deletion of completed schedules:
 
 Using pnpm:
 ```bash
@@ -66,7 +66,7 @@ npm start -- --dry-run=false
 Note: When using npm, you need to add an extra `--` before the arguments.
 
 The script will provide detailed output including:
-- Number of schedules found
+- Number of completed schedules found
 - Schedule IDs and details
 - Deletion status for each schedule
 - Summary of operations
