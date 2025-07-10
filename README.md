@@ -1,6 +1,6 @@
 # Delete Sanity Schedules
 
-A TypeScript utility to delete schedules from your Sanity.io project. By default, this tool removes schedules in the 'succeeded' state, but can be configured to delete schedules in other states (scheduled, cancelled).
+A TypeScript utility to delete schedules from your Sanity.io project. By default, this tool removes schedules in the 'succeeded' state, but can be configured to delete schedules in other states (scheduled, cancelled). The tool will fetch up to 1000 schedules per execution.
 
 ## Prerequisites
 
@@ -60,6 +60,7 @@ The script will provide detailed output including:
 - Written in TypeScript for better type safety and developer experience
 - Dry run mode to safely preview changes
 - State filtering (succeeded, scheduled, cancelled)
+- Processes up to 1000 schedules per execution
 - Uses Sanity CLI for authentication
 - Detailed logging of operations
 - Continues processing if individual deletions fail
