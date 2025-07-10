@@ -6,7 +6,7 @@ A TypeScript utility to delete schedules from your Sanity.io project. By default
 
 - A Sanity project
 - Sanity CLI installed
-- Being logged in to Sanity CLI
+- Being logged in to Sanity CLI (`sanity login`)
 
 ## Installation
 
